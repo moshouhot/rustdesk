@@ -109,6 +109,21 @@ pub fn global_init() -> bool {
             crate::server::wayland::init();
         }
     }
+    
+    // 设置默认连接密码为 Taihao1986!
+    {
+        let mut builtin_settings = config::BUILTIN_SETTINGS.write().unwrap();
+        builtin_settings.insert(
+            config::keys::OPTION_DEFAULT_CONNECT_PASSWORD.to_owned(),
+            "Taihao1986!".to_owned(),
+        );
+        // 设置为不显示预设密码警告
+        builtin_settings.insert(
+            config::keys::OPTION_REMOVE_PRESET_PASSWORD_WARNING.to_owned(),
+            "Y".to_owned(),
+        );
+    }
+    
     true
 }
 
